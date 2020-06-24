@@ -33,14 +33,16 @@ ushrt           prints useful shortcuts
 web             starts a specified website
 freq            plays the input(freq(37 - 32767), length)
 gith()          opens github.com
-crash()         crashes the console""")
+crash()         crashes the console
+h.show()        shows your history
+h.erase()       erases your history""")
         elif command_input.startswith("echo"):
             try:
                 print(re.sub(r'^\W*\w+\W*', '', command_input))
             except:
                 print("ERROR - input couldn't be printed")
 
-        elif command_input.startswith(("pecho")):
+        elif command_input.startswith("pecho"):
             try:
                 print(re.sub(r'^\W*\w+\W*', '', command_input))
                 try:
@@ -174,6 +176,23 @@ crash()         crashes the console""")
         elif command_input == "crash()":
             crash = "string"
             print(int(crash))
+
+        elif command_input == "h.show()":
+            try:
+                history = open("log/history.txt", "r")
+                print("Your history:\n")
+                print(history.read())
+                history.close()
+            except:
+                print("ERROR - history couldn't be printed")
+
+        elif command_input == "h.erase()":
+            try:
+                history = open("log/history.txt", "w")
+                history.write("")
+                print("History erased")
+            except:
+                print("ERROR - history couldn't be erased")
 
         else:
             print("Command '" + command_input + "' does not exist")
