@@ -3,15 +3,14 @@ import re
 import random
 import time
 import webbrowser
+import winsound
 
-print("POTATO SHELL")
-print("""=====================================
-= Made by Potato man / Potato-git13 =
-=====================================""")
-
-print(" ")
-print("Type help() for commands.")
-print("")
+try:
+    banner = open(".banner", "r")
+    print(banner.read())
+except:
+    print("ERROR - the banner couldn't be loaded")
+print("\nType help() for the list of commands")
 
 
 def main():
@@ -31,7 +30,8 @@ strt            opens a specified file
 cmd()           starts cmd terminal
 calc()          open the calculator
 ushrt           prints useful shortcuts
-web             starts a specified website""")
+web             starts a specified website
+freq            plays the input(freq(37 - 32767), length""")
         elif command_input.startswith("echo"):
             try:
                 print(re.sub(r'^\W*\w+\W*', '', command_input))
@@ -148,6 +148,19 @@ web             starts a specified website""")
                 print("Web site opened")
             except:
                 print("ERROR - the web site couldn't be opened")
+
+        elif command_input.startswith("freq"):
+            freq_array = command_input.split(" ")
+            length = freq_array[2]
+            freq = freq_array[1]
+
+            try:
+                print(f"Playing {freq} for {length} seconds")
+
+                length = int(length) * 1000
+                winsound.Beep(int(freq), length)
+            except:
+                print("ERROR - frequency couldn't be played")
 
         else:
             print("Command '" + command_input + "' does not exist")
