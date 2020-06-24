@@ -31,7 +31,9 @@ cmd()           starts cmd terminal
 calc()          open the calculator
 ushrt           prints useful shortcuts
 web             starts a specified website
-freq            plays the input(freq(37 - 32767), length""")
+freq            plays the input(freq(37 - 32767), length)
+gith()          opens github.com
+crash()         crashes the console""")
         elif command_input.startswith("echo"):
             try:
                 print(re.sub(r'^\W*\w+\W*', '', command_input))
@@ -162,13 +164,24 @@ freq            plays the input(freq(37 - 32767), length""")
             except:
                 print("ERROR - frequency couldn't be played")
 
+        elif command_input == "gith()":
+            try:
+                webbrowser.open("https://github.com")
+                print("GitHub opened")
+            except:
+                print("ERROR - GitHub couldn't be opened")
+
+        elif command_input == "crash()":
+            crash = "string"
+            print(int(crash))
+
         else:
             print("Command '" + command_input + "' does not exist")
 
         try:
             os.makedirs("log")
         except:
-            poop = "poop"
+            place_holder = True
         try:
             file = open("log/history.txt", "x")
         except:
