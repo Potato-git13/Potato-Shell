@@ -5,8 +5,10 @@ import time
 import webbrowser
 import winsound
 
+normal = os.getcwd()
+
 try:
-    banner = open(".banner", "r")
+    banner = open(normal + "/.banner", "r")
     print(banner.read())
 except:
     print("ERROR - the banner couldn't be loaded")
@@ -15,7 +17,7 @@ print("\nType help() for the list of commands")
 
 def main():
     while True:
-        command_input = input(">")
+        command_input = input(os.getlogin() + " : " + os.getcwd() + " >")
         if command_input == "help()":
             print("""help()          shows this list
 echo            writes the input
@@ -29,13 +31,16 @@ dldir           delete a directory
 strt            opens a specified file
 cmd()           starts cmd terminal
 calc()          open the calculator
-ushrt           prints useful shortcuts
+ushrt()         prints useful shortcuts
 web             starts a specified website
 freq            plays the input(freq(37 - 32767), length)
 gith()          opens github.com
 crash()         crashes the console
 h.show()        shows your history
-h.erase()       erases your history""")
+h.erase()       erases your history
+indir()         prints all the files and folders in the current directory
+cd              changes the cdw to the input
+ls()            lists all files and directories in the cwd""")
         elif command_input.startswith("echo"):
             try:
                 print(re.sub(r'^\W*\w+\W*', '', command_input))
@@ -46,9 +51,9 @@ h.erase()       erases your history""")
             try:
                 print(re.sub(r'^\W*\w+\W*', '', command_input))
                 try:
-                    f = open("p echo file.txt", "x")
+                    f = open(normal + "/p echo file.txt", "x")
                 except:
-                    f = open("p echo file.txt", "a")
+                    f = open(normal + "/p echo file.txt", "a")
 
                 f.write(re.sub(r'^\W*\w+\W*', '', command_input) + "\n")
                 f.close()
@@ -135,7 +140,7 @@ h.erase()       erases your history""")
             except:
                 print("ERROR - couldn't start the calculator")
 
-        elif command_input == "ushrt":
+        elif command_input == "ushrt()":
             print("MC")
             print("D:/.minecraft/Launcher.exe")
             print("PS")
@@ -179,7 +184,7 @@ h.erase()       erases your history""")
 
         elif command_input == "h.show()":
             try:
-                history = open("log/history.txt", "r")
+                history = open(normal + "/log/history.txt", "r")
                 print("Your history:\n")
                 print(history.read())
                 history.close()
@@ -188,11 +193,27 @@ h.erase()       erases your history""")
 
         elif command_input == "h.erase()":
             try:
-                history = open("log/history.txt", "w")
+                history = open(normal + "/log/history.txt", "w")
                 history.write("")
                 print("History erased")
             except:
                 print("ERROR - history couldn't be erased")
+
+        elif command_input.startswith("cd"):
+            string = re.sub(r'^\W*\w+\W*', '', command_input)
+            try:
+                os.chdir(string)
+            except:
+                print("ERROR - couldn't go to this directory")
+
+        elif command_input == "ls()":
+            try:
+                files = [f for f in os.listdir('.') if os.path.isfile(f)]
+                for f in files:
+                    print(f)
+            except:
+                print("ERROR - couldn't list any files/folders in this directory")
+
 
         else:
             print("Command '" + command_input + "' does not exist")
@@ -202,9 +223,9 @@ h.erase()       erases your history""")
         except:
             place_holder = True
         try:
-            file = open("log/history.txt", "x")
+            file = open(normal + "/log/history.txt", "x")
         except:
-            file = open("log/history.txt", "a")
+            file = open(normal + "/log/history.txt", "a")
         file.write(time.strftime("%Y:%m:%d:%H:%M:%S") + " - " + command_input + "\n")
         file.close()
 
