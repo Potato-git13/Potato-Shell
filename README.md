@@ -1,2 +1,4 @@
 # Potato-Shell
-A simple python shell
+A Python shell for Windows
+
+Made by Potato-git13
