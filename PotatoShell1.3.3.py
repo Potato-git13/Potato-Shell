@@ -253,16 +253,23 @@ def main():
                 print("ERROR - file not found")
 
         elif command_input.startswith("fwrite "):
-            string_without_fwrite = re.sub('fwrite ', '', command_input)
+            try:
+                string_without_fwrite = re.sub('fwrite ', '', command_input)
 
-            string_array = string_without_fwrite.split(" ")
-            path = string_array[0]
-            str_array_path = string_array
-            str_array_path.remove(path)
+                string_array = string_without_fwrite.split(" ")
+                old_path = string_array[0]
+                path = string_array[0].replace("~", " ")
+                str_array_path = string_array
+                str_array_path.remove(old_path)
 
-            file = open(path, "a")
-            for i in string_array:
-                file.write(i + " ")
+                file = open(path, "a")
+                for i in string_array:
+                    file.write(i.replace("$", "\n") + " ")
+                file.close()
+            except FileNotFoundError:
+                print("ERROR - no such directory")
+            except UnicodeEncodeError:
+                print("ERROR - unicode encode error. Can't use that symbol")
 
         else:
             print("Command '" + command_input + "' does not exist")
