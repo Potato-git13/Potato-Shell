@@ -1,7 +1,6 @@
 import os
 import re
 import random
-import time
 import webbrowser
 import winsound
 from colorama import Fore, Style, Back
@@ -9,6 +8,7 @@ from colorama import init
 import socket
 import Banner
 import Help
+import logging
 
 init(convert=True)
 
@@ -274,19 +274,7 @@ def main():
         else:
             print("Command '" + command_input + "' does not exist")
 
-        try:
-            os.makedirs(normal + "/log")
-        except FileExistsError:
-            pass
-        try:
-            file = open(normal + "/log/history.txt", "x")
-        except:
-            file = open(normal + "/log/history.txt", "a")
-        try:
-            file.write(time.strftime("%Y:%m:%d:%H:%M:%S") + " - " + command_input + "\n")
-        except UnicodeEncodeError:
-            file.write(time.strftime("%Y:%m:%d:%H:%M:%S") + " - UnicodeEncodeError\n")
-        file.close()
+        logging.writing(command_input, normal)
 
 
 main()
