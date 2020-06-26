@@ -28,4 +28,9 @@ cpunum()        returns how many CPUs are in the machine
 fg.green()      turns the text green
 fg.blue()       turns the text blue
 c.reset()       resets the color of the text
-cls()           clears the console""")
+cls()           clears the console
+fread           reads the specified file
+fwrite          creates or opens a specified file (depending on if it
+                already exists) and writes the input in it
+                (use '~' instead of spaces in the path)
+                (use '$' instead of enter in text)""")
