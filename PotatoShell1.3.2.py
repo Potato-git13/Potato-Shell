@@ -7,49 +7,22 @@ import winsound
 from colorama import Fore, Style, Back
 from colorama import init
 import socket
+import Banner
+import Help
 
 init(convert=True)
 
 normal = os.getcwd()
 
-try:
-    banner = open(normal + "/.banner", "r")
-    print(banner.read())
-except:
-    print("ERROR - the banner couldn't be loaded")
-print("\nType help() for the list of commands")
+
+Banner.banner_read()
 
 
 def main():
     while True:
         command_input = input(os.getlogin() + "@" + socket.gethostname() + " : " + os.getcwd() + " >")
         if command_input == "help()":
-            print("""help()          shows this list
-echo            writes the input
-pecho           writes the input in to a .txt file
-exit()          kills the shell
-rpass           generates a random password(input is the len)
-mkfile          make a file in a specified path
-mkdir           make a directory in a specified path
-dlt             delete a file
-dldir           delete a directory
-strt            opens a specified file
-cmd()           starts cmd terminal
-calc()          open the calculator
-note()          opens notepad
-exp()           opens Windows explorer
-web             starts a specified website
-freq            plays the input(freq(37 - 32767), length)
-gith()          opens github.com
-crash()         crashes the console
-h.show()        shows your history
-h.erase()       erases your history
-cd              changes the cdw to the input
-ls()            lists all files and directories in the cwd
-cpunum()        returns how many CPUs are in the machine
-fg.green()      turns the text green
-fg.blue()       turns the text blue
-c.reset()       resets the color of the text""")
+            Help.help_text()
         elif command_input.startswith("echo"):
             try:
                 print(re.sub(r'^\W*\w+\W*', '', command_input))
@@ -262,18 +235,27 @@ c.reset()       resets the color of the text""")
         elif command_input == "c.reset()":
             print(Fore.RESET + "Text is now normal")
 
+        elif command_input == "cls()":
+            def clear():
+                os.system('cls')
+            clear()
+            Banner.banner_read()
+
         else:
             print("Command '" + command_input + "' does not exist")
 
         try:
             os.makedirs(normal + "/log")
-        except:
-            place_holder = True
+        except FileExistsError:
+            pass
         try:
             file = open(normal + "/log/history.txt", "x")
         except:
             file = open(normal + "/log/history.txt", "a")
-        file.write(time.strftime("%Y:%m:%d:%H:%M:%S") + " - " + command_input + "\n")
+        try:
+            file.write(time.strftime("%Y:%m:%d:%H:%M:%S") + " - " + command_input + "\n")
+        except UnicodeEncodeError:
+            file.write(time.strftime("%Y:%m:%d:%H:%M:%S") + " - UnicodeEncodeError\n")
         file.close()
 
 
