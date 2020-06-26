@@ -137,9 +137,12 @@ def main():
                 print("ERROR - the web site couldn't be opened")
 
         elif command_input.startswith("freq"):
-            freq_array = command_input.split(" ")
-            length = freq_array[2]
-            freq = freq_array[1]
+            try:
+                freq_array = command_input.split(" ")
+                length = freq_array[2]
+                freq = freq_array[1]
+            except:
+                print("ERROR - index error: list index out of range")
 
             try:
                 print(f"Playing {freq} for {length} seconds")
@@ -240,6 +243,26 @@ def main():
                 os.system('cls')
             clear()
             Banner.banner_read()
+
+        elif command_input.startswith("fread"):
+            string = re.sub(r'^\W*\w+\W*', '', command_input)
+            try:
+                file = open(string, "r")
+                print(file.read())
+            except FileNotFoundError:
+                print("ERROR - file not found")
+
+        elif command_input.startswith("fwrite "):
+            string_without_fwrite = re.sub('fwrite ', '', command_input)
+
+            string_array = string_without_fwrite.split(" ")
+            path = string_array[0]
+            str_array_path = string_array
+            str_array_path.remove(path)
+
+            file = open(path, "a")
+            for i in string_array:
+                file.write(i + " ")
 
         else:
             print("Command '" + command_input + "' does not exist")
