@@ -9,6 +9,7 @@ import socket
 import Banner
 import Help
 import logging
+import send
 
 init(convert=True)
 
@@ -235,8 +236,11 @@ def main():
         elif command_input == "fg.blue()":
             print(Fore.BLUE + "Text is now blue")
 
+        elif command_input == "c.w&b()":
+            print(Back.WHITE, Fore.BLACK + "White background, black foreground")
+
         elif command_input == "c.reset()":
-            print(Fore.RESET + "Text is now normal")
+            print(Fore.RESET, Back.RESET + "Text is now normal")
 
         elif command_input == "cls()":
             def clear():
@@ -270,6 +274,12 @@ def main():
                 print("ERROR - no such directory")
             except UnicodeEncodeError:
                 print("ERROR - unicode encode error. Can't use that symbol")
+
+        elif command_input == "gsend()":
+            try:
+                send.snd()
+            except:
+                print("ERROR - the email couldn't be sent")
 
         else:
             print("Command '" + command_input + "' does not exist")
