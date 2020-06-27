@@ -27,10 +27,13 @@ ls()            lists all files and directories in the cwd
 cpunum()        returns how many CPUs are in the machine
 fg.green()      turns the text green
 fg.blue()       turns the text blue
+c.w&b()         turns the background white and the foreground black
 c.reset()       resets the color of the text
 cls()           clears the console
 fread           reads the specified file
 fwrite          creates or opens a specified file (depending on if it
                 already exists) and writes the input in it
                 (use '~' instead of spaces in the path)
-                (use '$' instead of enter in text)""")
+                (use '$' instead of enter in text)
+gsend()         send a email using gmail. Sender's addres has to have
+                less secure apps turned on""")
