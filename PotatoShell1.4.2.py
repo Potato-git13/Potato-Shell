@@ -88,8 +88,6 @@ def main():
                 print("Directory made")
             except FileNotFoundError:
                 print("ERROR - path doesn't exist")
-            except:
-                print("ERROR - directory couldn't be made")
 
         elif command_input.startswith("dlt"):
             try:
@@ -109,8 +107,8 @@ def main():
             try:
                 os.startfile("C:/Windows/System32/cmd.exe")
                 print("cmd started")
-            except:
-                print("ERROR - couldn't start cmd")
+            except FileNotFoundError:
+                print("ERROR - file does not exist or it's in another directory")
 
         elif command_input.startswith("strt"):
             string = re.sub(r'^\W*\w+\W*', '', command_input)
@@ -119,30 +117,34 @@ def main():
                 print("File started")
             except FileNotFoundError:
                 print("ERROR - file could not be found")
-            except:
-                print("ERROR - couldn't start the file")
 
         elif command_input == "calc()":
             try:
                 os.startfile("C:/Windows/System32/calc.exe")
                 print("Calculator started")
-            except:
-                print("ERROR - couldn't start the calculator")
+            except FileNotFoundError:
+                print("ERROR - file does not exist or it's in another directory")
 
         elif command_input.startswith("web"):
-            string = re.sub(r'^\W*\w+\W*', '', command_input)
+            url = re.sub(r'^\W*\w+\W*', '', command_input)
+            webbrowser.open(url)
+            print("Web site opened")
+
+        elif command_input.startswith("incognito"):
             try:
-                webbrowser.open(string)
-                print("Web site opened")
-            except:
-                print("ERROR - the web site couldn't be opened")
+                url = re.sub(r'^\W*\w+\W*', '', command_input)
+                chrome_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s --incognito'
+                webbrowser.get(chrome_path).open_new(url)
+                print("Website opened with incognito")
+            except FileNotFoundError:
+                print("ERROR - Chrome couldn't be found")
 
         elif command_input.startswith("freq"):
             try:
                 freq_array = command_input.split(" ")
                 length = freq_array[2]
                 freq = freq_array[1]
-            except:
+            except IndexError:
                 print("ERROR - index error: list index out of range")
 
             try:
@@ -248,7 +250,7 @@ def main():
             clear()
             Banner.banner_read()
 
-        elif command_input.startswith("fread"):
+        elif command_input.startswith("cat"):
             string = re.sub(r'^\W*\w+\W*', '', command_input)
             try:
                 file = open(string, "r")
@@ -276,10 +278,27 @@ def main():
                 print("ERROR - unicode encode error. Can't use that symbol")
 
         elif command_input == "gsend()":
+            mail = input("email>")
+            password = input("password>")
+            receiver = input("receiver>")
+            subject = input("subject>")
+            message = input("message>")
+            file_location = input("file location>")
             try:
-                send.snd()
+                send.sending(mail, password, receiver, subject, message, file_location)
             except:
                 print("ERROR - the email couldn't be sent")
+
+        elif command_input == "mhelp()":
+            webbrowser.open("https://docs.python.org/3/library")
+            print("Python docs opened")
+
+        elif command_input == ".ins()":
+            try:
+                cwf = os.path.basename(__file__)
+                os.startfile(cwf)
+            except FileNotFoundError:
+                print("ERROR - file does not exist")
 
         else:
             print("Command '" + command_input + "' does not exist")
