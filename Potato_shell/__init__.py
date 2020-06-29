@@ -1,1 +1,1 @@
-# init foe the Potato_shell package
+# init for the Potato_shell package
