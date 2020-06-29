@@ -6,10 +6,11 @@ import winsound
 from colorama import Fore, Style, Back
 from colorama import init
 import socket
-import Banner
-import Help
-import logging
-import send
+import Potato_shell.Banner as Banner
+import Potato_shell.Help as Help
+import Potato_shell.logging as logging
+import Potato_shell.send as send
+import Potato_shell.license as license
 
 init(convert=True)
 
@@ -23,6 +24,9 @@ def main():
         command_input = input(os.getlogin() + "@" + socket.gethostname() + " : " + os.getcwd() + " >")
         if command_input == "help()":
             Help.help_text()
+
+        elif command_input == "license()":
+            license.license_show()
         elif command_input.startswith("echo"):
             try:
                 print(re.sub(r'^\W*\w+\W*', '', command_input))
