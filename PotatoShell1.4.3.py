@@ -15,8 +15,7 @@ init(convert=True)
 
 normal = os.getcwd()
 
-
-Banner.banner_read()
+Banner.banner_read(normal)
 
 
 def main():
@@ -238,9 +237,6 @@ def main():
         elif command_input == "fg.blue()":
             print(Fore.BLUE + "Text is now blue")
 
-        elif command_input == "c.w&b()":
-            print(Back.WHITE, Fore.BLACK + "White background, black foreground")
-
         elif command_input == "c.reset()":
             print(Fore.RESET, Back.RESET + "Text is now normal")
 
@@ -248,7 +244,7 @@ def main():
             def clear():
                 os.system('cls')
             clear()
-            Banner.banner_read()
+            Banner.banner_read(normal)
 
         elif command_input.startswith("cat"):
             string = re.sub(r'^\W*\w+\W*', '', command_input)
@@ -300,6 +296,17 @@ def main():
             except FileNotFoundError:
                 print("ERROR - file does not exist")
 
+        elif command_input == "tasklist()":
+            os.system("tasklist")
+
+        elif command_input == "tree()":
+            os.system("tree")
+
+        elif command_input.startswith("tkill"):
+            try:
+                os.system("taskkill" + command_input.replace("tkill", ""))
+            except:
+                print("ERROR")
         else:
             print("Command '" + command_input + "' does not exist")
 
