@@ -29,7 +29,6 @@ ls()            lists all files and directories in the cwd
 cpunum()        returns how many CPUs are in the machine
 fg.green()      turns the text green
 fg.blue()       turns the text blue
-c.w&b()         turns the background white and the foreground black
 c.reset()       resets the color of the text
 cls()           clears the console
 cat             reads the specified file
@@ -39,4 +38,8 @@ fwrite          creates or opens a specified file (depending on if it
                 (use '$' instead of enter in text)
 gsend()         send a email using gmail. Sender's address has to have
                 less secure apps turned on(files are not necessary)
-.ins()          instantiates a new window of the Potato shell""")
+.ins()          instantiates a new window of the Potato shell
+tasklist()      shows the list of tasks currently running
+tkill           kill or stop a running process or application
+                (tkill /? for more information)
+tree()          graphically shows the directory structure""")
