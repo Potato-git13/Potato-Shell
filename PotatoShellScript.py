@@ -29,19 +29,19 @@ def main():
             license.license_show()
         elif command_input.startswith("echo"):
             try:
-                print(re.sub(r'^\W*\w+\W*', '', command_input))
+                print(re.sub("echo ", '', command_input))
             except:
                 print("ERROR - input couldn't be printed")
 
         elif command_input.startswith("pecho"):
             try:
-                print(re.sub(r'^\W*\w+\W*', '', command_input))
+                print(re.sub("pecho ", '', command_input))
                 try:
                     f = open(normal + "/p echo file.txt", "x")
                 except:
                     f = open(normal + "/p echo file.txt", "a")
 
-                f.write(re.sub(r'^\W*\w+\W*', '', command_input) + "\n")
+                f.write(re.sub("pecho ", '', command_input) + "\n")
                 f.close()
             except:
                 print("ERROR - input couldn't be writen in the file")
@@ -50,7 +50,7 @@ def main():
             exit()
 
         elif command_input.startswith("rpass"):
-            string = re.sub(r'^\W*\w+\W*', '', command_input)
+            string = re.sub("rpass ", '', command_input)
             try:
 
                 def random_string(string_length=8):
@@ -75,7 +75,7 @@ def main():
                 print("ERROR - password couldn't be generated")
 
         elif command_input.startswith("mkfile"):
-            string = re.sub(r'^\W*\w+\W*', '', command_input)
+            string = re.sub("mkfile ", '', command_input)
             try:
                 open(string, "x")
                 print("File made")
@@ -85,7 +85,7 @@ def main():
                 print("ERROR - directory doesn't exist")
 
         elif command_input.startswith("mkdir"):
-            string = re.sub(r'^\W*\w+\W*', '', command_input)
+            string = re.sub("mkdir ", '', command_input)
             try:
                 os.mkdir(string)
                 print("Directory made")
@@ -94,14 +94,14 @@ def main():
 
         elif command_input.startswith("dlt"):
             try:
-                os.remove(re.sub(r'^\W*\w+\W*', '', command_input))
+                os.remove(re.sub("dlt ", '', command_input))
                 print("File removed")
             except FileNotFoundError:
                 print("ERROR - file couldn't be found")
 
-        elif command_input.startswith("dldir"):
+        elif command_input.startswith("dltdir"):
             try:
-                os.removedirs(re.sub(r'^\W*\w+\W*', '', command_input))
+                os.removedirs(re.sub("dltdir ", '', command_input))
                 print("Directory removed")
             except OSError:
                 print("ERROR - OSError")
@@ -114,7 +114,7 @@ def main():
                 print("ERROR - file does not exist or it's in another directory")
 
         elif command_input.startswith("strt"):
-            string = re.sub(r'^\W*\w+\W*', '', command_input)
+            string = re.sub("strt ", '', command_input)
             try:
                 os.startfile(string)
                 print("File started")
@@ -129,13 +129,13 @@ def main():
                 print("ERROR - file does not exist or it's in another directory")
 
         elif command_input.startswith("web"):
-            url = re.sub(r'^\W*\w+\W*', '', command_input)
+            url = re.sub("web ", '', command_input)
             webbrowser.open(url)
             print("Web site opened")
 
         elif command_input.startswith("incognito"):
             try:
-                url = re.sub(r'^\W*\w+\W*', '', command_input)
+                url = re.sub("incognito ", '', command_input)
                 chrome_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s --incognito'
                 webbrowser.get(chrome_path).open_new(url)
                 print("Website opened with incognito")
@@ -191,7 +191,7 @@ def main():
                 print("ERROR - history couldn't be erased")
 
         elif command_input.startswith("cd"):
-            string = re.sub(r'^\W*\w+\W*', '', command_input)
+            string = re.sub("cd ", '', command_input)
             try:
                 os.chdir(string)
             except:
@@ -251,7 +251,7 @@ def main():
             Banner.banner_read(normal)
 
         elif command_input.startswith("cat"):
-            string = re.sub(r'^\W*\w+\W*', '', command_input)
+            string = re.sub("cat ", '', command_input)
             try:
                 file = open(string, "r")
                 print(file.read())
