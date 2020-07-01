@@ -28,9 +28,6 @@ h.erase()       erases your history
 cd              changes the cdw to the input
 ls()            lists all files and directories in the cwd
 cpunum()        returns how many CPUs are in the machine
-fg.green()      turns the text green
-fg.blue()       turns the text blue
-c.reset()       resets the color of the text
 cls()           clears the console
 cat             reads the specified file
 fwrite          creates or opens a specified file (depending on if it
@@ -43,4 +40,5 @@ gsend()         send a email using gmail. Sender's address has to have
 tasklist()      shows the list of tasks currently running
 tkill           kill or stop a running process or application
                 (tkill /? for more information)
-tree()          graphically shows the directory structure""")
+tree()          graphically shows the directory structure
+color           changes the color of the foreground""")
