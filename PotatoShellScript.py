@@ -27,29 +27,27 @@ def main():
         elif command_input == "license()":
             license.license_show()
         elif command_input.startswith("echo"):
-            try:
-                print(re.sub("echo ", '', command_input))
-            except:
-                print("ERROR - input couldn't be printed")
+            print(re.sub("echo ", '', command_input))
 
         elif command_input.startswith("pecho"):
             try:
                 print(re.sub("pecho ", '', command_input))
                 try:
                     f = open(normal + "/p echo file.txt", "x")
-                except:
+                except FileExistsError:
                     f = open(normal + "/p echo file.txt", "a")
 
                 f.write(re.sub("pecho ", '', command_input) + "\n")
-                f.close()
-            except:
+            except UnicodeEncodeError:
+                f.write("UnicodeError")
                 print("ERROR - input couldn't be writen in the file")
+            f.close()
 
         elif command_input == "exit()":
             exit()
 
         elif command_input.startswith("rpass"):
-            string = re.sub("rpass ", '', command_input)
+            strng = re.sub("rpass ", '', command_input)
             try:
 
                 def random_string(string_length=8):
@@ -63,20 +61,19 @@ def main():
                                'v', 'w', 'x', 'y', 'z',
                                '1', '2', '3', '4', '5', '6', '7', '8', '9',
                                '!', '"', '#', '$', '%', '&', '/', '(', ')', '=', '?', '*', ',', '.', '-', ';', ':', '_']
-                    return ''.join(random.choice(letters) for i in range(string_length))
+                    return ''.join(random.choice(letters) for a in range(string_length))
 
-                rand_num = random.randint(0, 99999)
                 num = 0
                 while num < 1:
-                    print(f"{random_string(int(string))}")
+                    print(f"{random_string(int(strng))}")
                     num += 1
-            except:
-                print("ERROR - password couldn't be generated")
+            except ValueError:
+                print("ERROR - value error char cannot be converted to an integer")
 
         elif command_input.startswith("mkfile"):
-            string = re.sub("mkfile ", '', command_input)
+            strng = re.sub("mkfile ", '', command_input)
             try:
-                open(string, "x")
+                open(strng, "x")
                 print("File made")
             except FileExistsError:
                 print("ERROR - file already exists")
@@ -84,9 +81,9 @@ def main():
                 print("ERROR - directory doesn't exist")
 
         elif command_input.startswith("mkdir"):
-            string = re.sub("mkdir ", '', command_input)
+            strng = re.sub("mkdir ", '', command_input)
             try:
-                os.mkdir(string)
+                os.mkdir(strng)
                 print("Directory made")
             except FileNotFoundError:
                 print("ERROR - path doesn't exist")
@@ -113,9 +110,9 @@ def main():
                 print("ERROR - file does not exist or it's in another directory")
 
         elif command_input.startswith("strt"):
-            string = re.sub("strt ", '', command_input)
+            strng = re.sub("strt ", '', command_input)
             try:
-                os.startfile(string)
+                os.startfile(strng)
                 print("File started")
             except FileNotFoundError:
                 print("ERROR - file could not be found")
@@ -154,15 +151,11 @@ def main():
 
                 length = int(length) * 1000
                 winsound.Beep(int(freq), length)
-            except:
-                print("ERROR - frequency couldn't be played")
+            except ValueError:
+                print("ERROR - freq is either to low or to high")
 
         elif command_input == "gith()":
-            try:
-                webbrowser.open("https://github.com")
-                print("GitHub opened")
-            except:
-                print("ERROR - GitHub couldn't be opened")
+            webbrowser.open("https://github.com")
 
         elif command_input == "crash()":
             crash = "string"
@@ -176,8 +169,6 @@ def main():
                 history.close()
             except FileNotFoundError:
                 print("ERROR - file couldn't be found")
-            except:
-                print("ERROR - history couldn't be printed")
 
         elif command_input == "h.erase()":
             try:
@@ -186,55 +177,48 @@ def main():
                 print("History erased")
             except FileNotFoundError:
                 print("ERROR - file not found")
-            except:
+            except OSError:
                 print("ERROR - history couldn't be erased")
 
         elif command_input.startswith("cd"):
-            string = re.sub("cd ", '', command_input)
+            strng = re.sub("cd ", '', command_input)
             try:
-                os.chdir(string)
-            except:
-                print("ERROR - couldn't go to this directory")
+                os.chdir(strng)
+            except FileNotFoundError:
+                print("ERROR - directory doesn't exist")
 
         elif command_input == "ls()":
-            try:
-                print("")
+            print("")
 
-                files = [f for f in os.listdir('.') if os.path.isfile(f)]
-                for f in files:
-                    print(f)
+            files = [f for f in os.listdir('.') if os.path.isfile(f)]
+            for f in files:
+                print(f)
 
-                print("")
+            print("")
 
-                dirs = [d for d in os.listdir('.') if os.path.isdir(d)]
-                for d in dirs:
-                    print(d)
+            dirs = [d for d in os.listdir('.') if os.path.isdir(d)]
+            for d in dirs:
+                print(d)
 
-                print("")
-
-            except:
-                print("ERROR - couldn't list any files/folders in this directory")
+            print("")
 
         elif command_input == "cpunum()":
-            try:
-                print("Number of CPUs:")
-                print(os.cpu_count())
-            except:
-                print("ERROR - couldn't count your CPUs")
+            print("Number of CPUs:")
+            print(os.cpu_count())
 
         elif command_input == "note()":
             try:
                 os.startfile("C:/Windows/notepad.exe")
                 print("Notepad opened")
-            except:
-                print("ERROR - Notepad.exe couldn't be run")
+            except FileNotFoundError:
+                print("ERROR - Notepad.exe couldn't found")
 
         elif command_input == "exp()":
             try:
                 os.startfile("C:/Windows/explorer.exe")
                 print("Windows explorer opened")
-            except:
-                print("ERROR - windows explorer couldn't be opened")
+            except FileNotFoundError:
+                print("ERROR - windows explorer couldn't be found")
 
         elif command_input == "cls()":
             def clear():
@@ -243,9 +227,9 @@ def main():
             Banner.banner_read(normal)
 
         elif command_input.startswith("cat"):
-            string = re.sub("cat ", '', command_input)
+            strng = re.sub("cat ", '', command_input)
             try:
-                file = open(string, "r")
+                file = open(strng, "r")
                 print(file.read())
             except FileNotFoundError:
                 print("ERROR - file not found")
@@ -299,10 +283,7 @@ def main():
             os.system("tree")
 
         elif command_input.startswith("tkill"):
-            try:
-                os.system("taskkill" + command_input.replace("tkill", ""))
-            except:
-                print("ERROR")
+            os.system("taskkill" + command_input.replace("tkill", ""))
 
         elif command_input.startswith("color"):
             os.system("color " + re.sub("color ", "", command_input))
