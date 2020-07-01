@@ -3,7 +3,6 @@ import re
 import random
 import webbrowser
 import winsound
-from colorama import Fore, Style, Back
 from colorama import init
 import socket
 import Potato_shell.Banner as Banner
@@ -199,17 +198,19 @@ def main():
 
         elif command_input == "ls()":
             try:
-                print(Style.RESET_ALL + "")
+                print("")
+
                 files = [f for f in os.listdir('.') if os.path.isfile(f)]
                 for f in files:
-                    print(Fore.LIGHTGREEN_EX + f)
+                    print(f)
 
-                print(Style.RESET_ALL)
+                print("")
 
                 dirs = [d for d in os.listdir('.') if os.path.isdir(d)]
                 for d in dirs:
-                    print(Fore.LIGHTBLUE_EX + d)
-                print(Style.RESET_ALL)
+                    print(d)
+
+                print("")
 
             except:
                 print("ERROR - couldn't list any files/folders in this directory")
@@ -234,15 +235,6 @@ def main():
                 print("Windows explorer opened")
             except:
                 print("ERROR - windows explorer couldn't be opened")
-
-        elif command_input == "fg.green()":
-            print(Fore.GREEN + "Text is now green")
-
-        elif command_input == "fg.blue()":
-            print(Fore.BLUE + "Text is now blue")
-
-        elif command_input == "c.reset()":
-            print(Fore.RESET, Back.RESET + "Text is now normal")
 
         elif command_input == "cls()":
             def clear():
@@ -311,10 +303,15 @@ def main():
                 os.system("taskkill" + command_input.replace("tkill", ""))
             except:
                 print("ERROR")
+
+        elif command_input.startswith("color"):
+            os.system("color " + re.sub("color ", "", command_input))
+
         else:
             print("Command '" + command_input + "' does not exist")
 
         logging.writing(command_input, normal)
 
 
+os.system("title Potato shell")
 main()
