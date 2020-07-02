@@ -7,7 +7,7 @@ from colorama import init
 import socket
 import Potato_shell.Banner as Banner
 import Potato_shell.Help as Help
-import Potato_shell.logging as logging
+import Potato_shell.logger as logging
 import Potato_shell.send as send
 import Potato_shell.license as license
 
