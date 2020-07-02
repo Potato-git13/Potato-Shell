@@ -156,6 +156,7 @@ def main():
 
         elif command_input == "gith()":
             webbrowser.open("https://github.com")
+            print("Github opened")
 
         elif command_input == "crash()":
             crash = "string"
