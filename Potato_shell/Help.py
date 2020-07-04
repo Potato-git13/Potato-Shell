@@ -41,4 +41,8 @@ tasklist()      shows the list of tasks currently running
 tkill           kill or stop a running process or application
                 (tkill /? for more information)
 tree()          graphically shows the directory structure
-color           changes the color of the foreground""")
+color           changes the color of the foreground
+time()          shows the current time (Y, m, d, H, M, S)
+mb()            runs the Music bot (songs in the music_list.txt required)
+md5             hashes the input text to md5
+audio.log       prints out what you say. (input is the amount of loops)""")
