@@ -10,6 +10,10 @@ import Potato_shell.Help as Help
 import Potato_shell.logger as logging
 import Potato_shell.send as send
 import Potato_shell.license as license
+import time
+import Potato_shell.Music_bot as mb
+import hashlib
+import Potato_shell.audio_log as al
 
 init(convert=True)
 
@@ -189,19 +193,22 @@ def main():
                 print("ERROR - directory doesn't exist")
 
         elif command_input == "ls()":
-            print("")
+            try:
+                print("")
 
-            files = [f for f in os.listdir('.') if os.path.isfile(f)]
-            for f in files:
-                print(f)
+                files = [f for f in os.listdir('.') if os.path.isfile(f)]
+                for f in files:
+                    print(f)
 
-            print("")
+                print("")
 
-            dirs = [d for d in os.listdir('.') if os.path.isdir(d)]
-            for d in dirs:
-                print(d)
+                dirs = [d for d in os.listdir('.') if os.path.isdir(d)]
+                for d in dirs:
+                    print(d)
 
-            print("")
+                print("")
+            except PermissionError:
+                print("ERROR - you are not permitted to see files in this directory")
 
         elif command_input == "cpunum()":
             print("Number of CPUs:")
@@ -224,6 +231,7 @@ def main():
         elif command_input == "cls()":
             def clear():
                 os.system('cls')
+
             clear()
             Banner.banner_read(normal)
 
@@ -288,6 +296,29 @@ def main():
 
         elif command_input.startswith("color"):
             os.system("color " + re.sub("color ", "", command_input))
+
+        elif command_input == "time()":
+            print("The current time is: " + time.strftime("%Y:%m:%d:%H:%M:%S"))
+
+        elif command_input == "mb()":
+            try:
+                mb.music()
+            except FileNotFoundError:
+                print("ERROR - file was not found")
+
+        elif command_input.startswith("md5 "):
+            try:
+                strng = re.sub("md5 ", "", command_input)
+                string_b = hashlib.md5(strng.encode())
+                print(string_b.hexdigest())
+            except:
+                print("ERROR - text couldn't be encoded")
+
+        elif command_input.startswith("audio.log"):
+            try:
+                al.log(command_input)
+            except ValueError:
+                print("ERROR - input wasn't a number")
 
         else:
             print("Command '" + command_input + "' does not exist")
