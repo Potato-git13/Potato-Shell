@@ -142,6 +142,20 @@ def main():
             except FileNotFoundError:
                 print("ERROR - Chrome couldn't be found")
 
+        elif command_input.startswith("search "):
+            search = re.sub("search ", "", command_input)
+            webbrowser.open_new("https://google.com/search?q=" + search.replace(" ", "+"))
+            print("searched for " + search)
+
+        elif command_input.startswith("isearch "):
+            try:
+                search = re.sub("isearch ", "", command_input)
+                chrome_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s --incognito'
+                webbrowser.get(chrome_path).open_new("https://google.com/search?q=" + search.replace(" ", "+"))
+                print("searched for " + search + " in incognito mode")
+            except FileNotFoundError:
+                print("ERROR - Chrome couldn't be found")
+
         elif command_input.startswith("freq"):
             try:
                 freq_array = command_input.split(" ")
@@ -191,6 +205,8 @@ def main():
                 os.chdir(strng)
             except FileNotFoundError:
                 print("ERROR - directory doesn't exist")
+            except PermissionError:
+                print("ERROR - you are not permitted to switch to this directory: " + strng)
 
         elif command_input == "ls()":
             try:
@@ -242,6 +258,8 @@ def main():
                 print(file.read())
             except FileNotFoundError:
                 print("ERROR - file not found")
+            except PermissionError:
+                print("ERROR - you are not permitted to see the contents of this file")
 
         elif command_input.startswith("fwrite "):
             try:
@@ -319,6 +337,10 @@ def main():
                 al.log(command_input)
             except ValueError:
                 print("ERROR - input wasn't a number")
+
+        elif command_input == "unicode()":
+            webbrowser.open("https://www.rapidtables.com/code/text/unicode-characters.html")
+            print("Unicode table opened")
 
         else:
             print("Command '" + command_input + "' does not exist")
