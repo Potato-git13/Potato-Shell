@@ -19,6 +19,11 @@ def sending(input_mail, input_password, to_send_input, subject_input, message_in
         pass
     else:
         file_location = file_location_input
+
+    if subject == "":
+        pass
+    else:
+        subject = subject_input
     message = message_input
 
     msg = MIMEMultipart("alternative")
