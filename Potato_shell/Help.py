@@ -20,6 +20,8 @@ note()          opens notepad
 exp()           opens Windows explorer
 web             opens the specified website
 incognito       opens the specified website in incognito mode
+search          searches the specified terms on google
+isearch         searches the specified terms on google with incognito mode
 freq            plays the input(freq(37 - 32767), length)
 gith()          opens github.com
 crash()         crashes the console
@@ -45,4 +47,5 @@ color           changes the color of the foreground
 time()          shows the current time (Y, m, d, H, M, S)
 mb()            runs the Music bot (songs in the music_list.txt required)
 md5             hashes the input text to md5
-audio.log       prints out what you say. (input is the amount of loops)""")
+audio.log       prints out what you say. (input is the amount of loops)
+unicode()       opens the table with all of the unicode chars""")
