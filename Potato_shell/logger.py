@@ -12,7 +12,7 @@ def writing(command_input, normal_path):
         pass
     try:
         file = open(normal_path + "/log/history.txt", "x")
-    except:
+    except FileExistsError:
         file = open(normal_path + "/log/history.txt", "a")
     try:
         file.write(time.strftime("%Y:%m:%d:%H:%M:%S") + " - " + command_input + "\n")
