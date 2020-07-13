@@ -5,13 +5,13 @@ import webbrowser
 import winsound
 from colorama import init
 import socket
-import Potato_shell.Banner as Banner
-import Potato_shell.Help as Help
+import Potato_shell.banner as banner
+import Potato_shell.help as help
 import Potato_shell.logger as logging
 import Potato_shell.send as send
 import Potato_shell.license as license
 import time
-import Potato_shell.Music_bot as mb
+import Potato_shell.music_bot as mb
 import hashlib
 import Potato_shell.audio_log as al
 
@@ -19,14 +19,14 @@ init(convert=True)
 
 normal = os.getcwd()
 
-Banner.banner_read(normal)
+banner.banner_read(normal)
 
 
 def main():
     while True:
         command_input = input(os.getlogin() + "@" + socket.gethostname() + " : " + os.getcwd() + " >")
         if command_input == "help()":
-            Help.help_text()
+            help.help_text()
 
         elif command_input == "license()":
             license.license_show()
@@ -249,7 +249,7 @@ def main():
                 os.system('cls')
 
             clear()
-            Banner.banner_read(normal)
+            banner.banner_read(normal)
 
         elif command_input.startswith("cat"):
             strng = re.sub("cat ", '', command_input)
@@ -282,7 +282,8 @@ def main():
 
         elif command_input == "gsend()":
             mail = input("email>")
-            password = input("password>")
+            import Potato_shell.pass_to_asterisks as pta
+            password = pta.getpass("password>")
             receiver = input("receiver>")
             subject = input("subject>")
             message = input("message>")
