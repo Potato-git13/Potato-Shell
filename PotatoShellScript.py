@@ -3,7 +3,6 @@ import re
 import random
 import webbrowser
 import winsound
-from colorama import init
 import socket
 import Potato_shell.banner as banner
 import Potato_shell.help as help
@@ -14,8 +13,6 @@ import time
 import Potato_shell.music_bot as mb
 import hashlib
 import Potato_shell.audio_log as al
-
-init(convert=True)
 
 normal = os.getcwd()
 
