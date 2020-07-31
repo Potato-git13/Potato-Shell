@@ -12,7 +12,7 @@ rpass           generates a random password(input is the len)
 mkfile          make a file in a specified path
 mkdir           make a directory in a specified path
 dlt             delete a file
-dldir           delete a directory
+dltdir           delete a directory
 strt            opens a specified file
 cmd()           starts cmd terminal
 calc()          open the calculator
@@ -48,4 +48,6 @@ time()          shows the current time (Y, m, d, H, M, S)
 mb()            runs the Music bot (songs in the music_list.txt required)
 md5             hashes the input text to md5
 audio.log       prints out what you say. (input is the amount of loops)
-unicode()       opens the table with all of the unicode chars""")
+unicode()       opens the table with all of the unicode chars
+sudo            runs the .exe program as administrator (may not work)
+cmd             runs the specified command in cmd""")
