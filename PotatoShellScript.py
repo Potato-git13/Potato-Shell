@@ -21,14 +21,19 @@ banner.banner_read(normal)
 
 def main():
     while True:
-        command_input = input(os.getlogin() + "@" + socket.gethostname() + " : " + os.getcwd() + " >")
+        command_input = input(os.getlogin() + "@" + socket.gethostname() + " : " + os.getcwd() + " \n$ ")
         if command_input == "help()":
             help.help_text()
 
         elif command_input == "license()":
             license.license_show()
+
         elif command_input.startswith("echo"):
-            print(re.sub("echo ", '', command_input))
+            text_to_echo = re.sub("echo ", "", command_input)
+            if text_to_echo == "%PATH%":
+                print(os.getcwd())
+            else:
+                print(text_to_echo)
 
         elif command_input.startswith("pecho"):
             try:
@@ -280,7 +285,10 @@ def main():
         elif command_input == "gsend()":
             mail = input("email>")
             import Potato_shell.pass_to_asterisks as pta
-            password = pta.getpass("password>")
+            try:
+                password = pta.getpass("password>")
+            except KeyboardInterrupt:
+                print("\nCan't use Ctrl + C!")
             receiver = input("receiver>")
             subject = input("subject>")
             message = input("message>")
@@ -339,6 +347,22 @@ def main():
         elif command_input == "unicode()":
             webbrowser.open("https://www.rapidtables.com/code/text/unicode-characters.html")
             print("Unicode table opened")
+
+        elif command_input == "potatoenc()":
+            import Potato_shell.potato_encoding as penc
+            try:
+                penc.potatoes()
+                print("Started the encryption module")
+            except:
+                print("ERROR - something went wrong")
+
+        elif command_input.startswith("sudo "):
+            file_path = re.sub("sudo ", "", command_input)
+            os.system('runas /profile /user:administrator "' + file_path + '"')
+
+        elif command_input.startswith("cmd "):
+            command = re.sub("cmd ", "", command_input)
+            os.system(command)
 
         else:
             print("Command '" + command_input + "' does not exist")
