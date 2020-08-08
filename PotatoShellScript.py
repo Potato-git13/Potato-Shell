@@ -364,6 +364,10 @@ def main():
             command = re.sub("cmd ", "", command_input)
             os.system(command)
 
+        elif command_input.startswith("node "):
+            file_path = re.sub("node ", "", command_input)
+            os.system("node " + file_path)
+
         else:
             print("Command '" + command_input + "' does not exist")
 
